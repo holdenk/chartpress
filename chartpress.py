@@ -202,7 +202,7 @@ def build_image(image_spec, context_path, dockerfile_path=None, build_args=None)
     build_args (dict, optional):
         Dictionary of docker build arguments.
     """
-    cmd = ['docker', 'build', '-t', image_spec, context_path]
+    cmd = ['docker', 'buildx', 'build', '-t', image_spec, context_path, "--platform", "linux/arm64,linux/amd64", "--push"]
     if dockerfile_path:
         cmd.extend(['-f', dockerfile_path])
     for k, v in (build_args or {}).items():
